@@ -1,7 +1,7 @@
 # rankmeasures
 
 ### RBO
-This library contains a scala implementation of [Rank Biased Overlap (RBO)](http://codalism.com/research/papers/wmz10_tois.pdf), specifically the extrapolated form which handles non infinite, and potentially uneven length sequences. This implementation is adapted from Ritesh Agarwal's python implementation ([here](https://github.com/ragrawal/measures/blob/master/measures/rankedlist/RBO.py)), with minor cleanup & fixes.
+This library contains a scala implementation of [Rank Biased Overlap (RBO)](http://codalism.com/research/papers/wmz10_tois.pdf), specifically the extrapolated form which handles non infinite, and potentially uneven length sequences. This implementation is adapted from Ritesh Agrawal's python implementation ([here](https://github.com/ragrawal/measures/blob/master/measures/rankedlist/RBO.py)), with minor cleanup & fixes.
 
 The RBO.eval function enforces only that the p parameter is in the range 0 <= p <= 1, and assumes callers will supply sequences not containing duplicated values.
 
