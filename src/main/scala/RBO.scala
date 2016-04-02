@@ -11,7 +11,8 @@ object RBO {
   }
 
   private def innerEval[T](s1:Seq[T], s2:Seq[T], p:Double): Double = {
-    
+   
+    //ensure we iterate over the longest seq if lengths differ 
     val maxLen = math.max(s1.length, s2.length)
     val minLen = math.min(s1.length, s2.length)
     val listA = if (s1.length > s2.length) s1 else s2
@@ -23,7 +24,11 @@ object RBO {
     var accumOverlap = 0
     var Xs = 0.0
      
-    (1 to maxLen).foreach { depth => 
+    /*
+       in a single pass we need to sweep the sequences, tracking only
+       items which haven't been encountered in the comparison seq
+    */
+    (1 to maxLen).foreach { depth =>  // keeping depth 1-based as in the original paper
       val a = listA(depth-1)
       val b:Option[T] = if (listB.length >= depth) Some(listB(depth-1)) else None
       if (b.isDefined && a.equals(b.get)) {
@@ -49,12 +54,16 @@ object RBO {
       // special handling for equation 32
       if (depth == minLen)
         Xs = accumOverlap*1.0
-      
+     
+      /*
+        this is only hit in the event of uneven seq lengths 
+        here we add "probability of membership" extrapolation 
+      */
+
       if (depth > minLen) 
       	accumSum +=  pow(p,depth)*(Xs*(depth - minLen))/(minLen*depth)
     }
-
-    //accumOverlap*1.0/maxLen * pow(p,maxLen)  +  ((1-p)/p) * accumSum
+    // equation 32
     ((1 - p)/p) * accumSum  + (pow(p,maxLen) * ((accumOverlap - Xs)*1.0/maxLen + Xs*1.0/minLen ))
   }
 
