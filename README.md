@@ -6,7 +6,7 @@ This library contains a scala implementation of [Rank Biased Overlap (RBO)](http
 The RBO.eval function enforces only that the p parameter is in the range 0 <= p <= 1, and assumes callers will supply sequences not containing duplicated values.
 
 Runtime is roughly linear to the size of the input sequences:
-![alt text](httsp://github.com/b-a-n-y-a-n/rankmeasures/blob/master/meanruntime.png "Runtime in milliseconds for sequences of given length")
+![alt text](https://github.com/b-a-n-y-a-n/rankmeasures/blob/master/meanruntime.png "Runtime in milliseconds for sequences of given length")
 
 **Examples:**
 ```scala
